@@ -34,10 +34,10 @@ function compile(input,texttag){
 	for(var i = 0;i < lines.length;i++){
     	//code here using lines[i] which will give you each line
     	var text= lines[i];
-
+    	
+    	text=codify(text);
     	text=italify(text);
     	text=boldify(text);
-    	text=codify(text);
     	text=convertImg(text);
     	text=convertLink(text);
 
