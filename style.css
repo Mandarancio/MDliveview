@@ -2,29 +2,15 @@ html, body {
 	height: 100%;
 }
 .edit-div{
-	float: left;
-	width: 50%;
-	height: 100%;
-	min-height: 100%;
-	max-height: 100%;
-	max-width: 50%;
-	min-width: 50%;
-	margin: 10px;
-	bottom: 0px;
-	top: 0px;
-}
-.view-div{
 
 	float: left;
-	width: 45%;
-	height: 100%;
 	min-height: 100%;
 	max-height: 100%;
-	max-width: 45%;
-	min-width: 45%;
-	margin: 10px;
-	bottom: 0px;
-	top: 0px;
+	width: 50%;
+}
+.view-div{
+	float: left;
+	width: 40%;
 	padding-left: 40px;
 	color: #777;
 	font-size: 12px;

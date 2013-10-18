@@ -25,31 +25,36 @@
 <div class="edit-div">
 <form method="post" action="" id="form-editor">
 <textarea name="editor" class="text-editor" id="text_ed" rows="30">
-# Title
+#MD Live View
 {[index]}
-## Chapter
-### Sub chapter
-***italic***
-**bold**
-{{http://google.com|A Link}}
-Unorded list:
- * **bold item**
- * item
-Orded list:
- - ***italic item***
- - item
-### Picture!
-[[image.png|this ***is*** a **caption**]]
+##Introduzione
+Questo progetto e' nato con lo scopo di semplificare la pubblicazione di semplici contenuti sul web.
+##Tag disponibili
+###Modificatori di testo
+ **BOLD** testo in grassetto
+ ***ITALIC*** testo in italico
+###Liste
+Non ordinate:
+ *  Elemento
+ * **Elemento in grassetto**
+ * ***Elemento in corsivo***
+Ordinate:
+ - Elemento
+ - **Elemento in grassetto**
+ - ***Elemento in corsivo***
+###Speciali
+Immagini
+[[sample.png]]
+[[sample.png|testo]]
+Link
+{{http://www.google.com}}
+{{http://www.google.com|Google}}
+##Ringraziamenti
+Grazie a tutti per provare questo software!
 </textarea>
 </form>
 </div>
-        
 <div class="view-div" id="viewer">
-<div id="title"></div>
-        <!--         <div id="index-list">
-                        <h1>Index:</h1>
-                        <hr>
-                </div> -->
 <div id="text"></div>
 </div>
 
