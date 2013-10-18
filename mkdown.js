@@ -34,7 +34,8 @@ function compile(input,texttag){
 	for(var i = 0;i < lines.length;i++){
     	//code here using lines[i] which will give you each line
     	var text= lines[i];
-
+    	
+    	text=codify(text);
     	text=italify(text);
     	text=boldify(text);
     	text=convertImg(text);
@@ -180,8 +181,8 @@ function convertImg(text){
 }
 
 function boldify(text){
-	var bold=/\*\*[^\*]+\*\*/gi;
-	var boldchar=/\*\*/gi;
+	var bold=/\*[^\*]+\*/gi;
+	var boldchar=/\*/gi;
 	var special=text.match(bold);
 	if (special!=null){
 		for (var j=0;j<special.length;j++){
@@ -194,12 +195,26 @@ function boldify(text){
 }
 
 function italify(text){
+	var italic=/\*\*[^\*]+\*\*/gi;
+	var italicchar=/\*\*/gi;
+	var special=text.match(italic);
+	if (special!=null){
+		for (var j=0;j<special.length;j++){
+			var te=special[j].replace(italic,"<i>"+special[j]+"</i>");
+			te=te.replace(italicchar,"");
+			text=text.replace(special[j],te);
+		}
+	}
+	return text;
+}
+
+function codify(text){
 	var italic=/\*\*\*[^\*]+\*\*\*/gi;
 	var italicchar=/\*\*\*/gi;
 	var special=text.match(italic);
 	if (special!=null){
 		for (var j=0;j<special.length;j++){
-			var te=special[j].replace(italic,"<i>"+special[j]+"</i>");
+			var te=special[j].replace(italic,"<code>"+special[j]+"</code>");
 			te=te.replace(italicchar,"");
 			text=text.replace(special[j],te);
 		}
