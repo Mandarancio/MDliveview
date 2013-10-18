@@ -1,17 +1,20 @@
+var index={
+	flag:false,
+	tag:"",
+	title:"",
+	chapter:new Array(),
+	args:null
+};
+
+
 function compile(input,texttag){
 	if (input==null) return;
 	var lines=input.split("\n");
 	//clear output elements
 	$(texttag).empty();
 
-
+	index.flag=false;
 	var title_flag=false;
-	var index={
-		flag:false,
-		tag:"",
-		title:"",
-		chapter:new Array()
-	};
 
 	var chapIndex=-1;
 	var subChap=0;
@@ -41,15 +44,10 @@ function compile(input,texttag){
     	text=convertImg(text);
     	text=convertLink(text);
 
-    	if (text.indexOf("{[index]}")!=-1){
-    		index.flag=true;
-    		index.tag="#index-list";
-    		text="<div id=\"index-list\"></div>";
-    	}
-
+    	text=parseCommand(text);
 
  		//check ul status
- 		if (ul.active && text.indexOf(" * ")==-1){
+ 		if (ul.active && text.indexOf(" + ")==-1){
  			ul.active=false;
  		}
  		//check ol status
@@ -118,8 +116,8 @@ function compile(input,texttag){
 			}
 			text="";
 		}
-		else if (text.indexOf(" * ")!=-1 && !ol.active){
-			text=text.replace(" * ","<li>");
+		else if (text.indexOf(" + ")!=-1 && !ol.active){
+			text=text.replace(" + ","<li>");
 			text+="</li>";
 			if (ul.active){
 				$("#"+ul.tag).append(text);
@@ -140,13 +138,20 @@ function compile(input,texttag){
 
 	if (index.flag){
 		$(index.tag).empty();
+		var ord=false;
+		if (index.args!=null && index.args[1]=="ordered"){
+			ord=true;
+		}
+		var id;
 		for (var i=0;i<index.chapter.length;i++){
+			id="#c"+i;
 			for (var j=0; j<index.chapter[i].length;j++){
 				if (j==0){
-					$(index.tag).append("<a href=\"#c"+i+"\">"+index.chapter[i][j]+"</a>");
+					$(index.tag).append("<a href=\""+id+"\"><h2>"+(ord? (i+1)+" ":"")+$(id).text()+"</h2></a>");
 				}
 				else{
-					$(index.tag).append("<a href=\"#c"+i+"-"+j+"\">"+index.chapter[i][j]+"</a>");
+					id="#c"+i+"-"+j;
+					$(index.tag).append("<a href=\""+id+"\"><h3>"+(ord? (i+1)+"."+j+" ":"")+$(id).text()+"</h3></a>");
 				}	
 			}
 		}
@@ -246,6 +251,21 @@ function convertLink(text){
 	return text;
 }
 
+function parseCommand(text){
+	var regex=/\{\[[^\*]+\]\}/gi;
+	var cmds=text.match(regex);
+	if (cmds!=null){
+		for (var i=0;i<cmds.length;i++){
+			var info=cmds[i];
+			info=info.replace("{[","");
+			info=info.replace("]}","");
+			var list=info.split("|");
+			text=text.replace(cmds[i],command(info,list));
+		}
+	}
+	return text;
+}
+
 function parseRow(text){
 	var coulmns=text.split("|");
 	if (coulmns!=null && coulmns.length>1){
@@ -258,4 +278,32 @@ function parseRow(text){
 	}
 	else text="<tr><td>"+text+"</td></tr>";
 	return text;
+}
+
+function command(str,list){
+	if (list!=null && list.length>1){
+		var cmd=list[0];
+		if (cmd=="index"){
+			index.args=list;
+			index.flag=true;
+			index.tag="#index-list";
+			return "<div id=\"index-list\"></div>";
+
+		}
+		if (cmd=="echo"){
+			for (var i=1;i<list.length;i++){
+				console.log(list[i]);
+			}
+			return "";
+		}
+	}
+	else {
+		if (str=="index"){
+			index.flag=true;
+			index.tag="#index-list";
+			index.args=null;
+			return "<div id=\"index-list\"></div>";
+		}
+	}
+	return str;
 }
