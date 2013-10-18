@@ -28,7 +28,8 @@ function compile(input,texttag){
 		active:false
 	};
 
-
+	var inTable=false;
+	var tableid=0;
 
 	for(var i = 0;i < lines.length;i++){
     	//code here using lines[i] which will give you each line
@@ -46,9 +47,6 @@ function compile(input,texttag){
     	}
 
 
-		//important stuff!
-
-
  		//check ul status
  		if (ul.active && text.indexOf(" * ")==-1){
  			ul.active=false;
@@ -58,7 +56,24 @@ function compile(input,texttag){
  			ol.active=false
  		}
 
- 		if (text.indexOf("###") != -1) {
+ 		if (text.indexOf("[{")!=-1){
+ 			text=text.replace("[{","<table id=\"table-"+tableid+"\"></table>");
+ 			$(texttag).append(text);
+ 			inTable=true;
+ 			continue;
+ 		}
+ 		else if (text.indexOf("}]")!=-1 && inTable){
+ 			inTable=false;
+ 			tableid++;
+ 			text=text.replace("}]","");
+ 		}
+
+ 		if (inTable){
+ 			text=parseRow(text);
+ 			$("#table-"+tableid).append(text);
+ 			continue;
+ 		}
+ 		else if (text.indexOf("###") != -1) {
 			//h3
 			text=text.replace("###","<h3 id=\"c"+chapIndex+"-"+subChap+"\">");
 			text=text+"</h3>";
@@ -192,15 +207,6 @@ function italify(text){
 	return text;
 }
 
-// function tablify(text){
-// 	var table=/\{\{[^\*]+\}\}/gi;
-// 	var tables=text.match(img);
-// 	if (tables!=null){
-// 		for (var i=0;i<tables;i++){
-// 		}
-// 	}
-// }
-
 function convertLink(text){
 	var regex=/\{\{[^\*]+\}\}/gi;
 	var links=text.match(regex);
@@ -222,5 +228,19 @@ function convertLink(text){
 			text=text.replace(links[i],link);
 		}
 	}
+	return text;
+}
+
+function parseRow(text){
+	var coulmns=text.split("|");
+	if (coulmns!=null && coulmns.length>1){
+		var output="<tr>";
+		for (var i=0;i<coulmns.length;i++){
+			output+="<td>"+coulmns[i]+"</td>";
+		}
+		output+="</tr>";
+		return output;
+	}
+	else text="<tr><td>"+text+"</td></tr>";
 	return text;
 }
