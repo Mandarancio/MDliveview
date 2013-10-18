@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>MEditor</title>
+        <title>CSS Editor</title>
         <link href="style.css" rel="stylesheet" type="text/css">
         <link href="header.css" rel="stylesheet" type="text/css">
-        <link href="mu-base.css" rel="stylesheet" type="text/css">
+        <!-- <link href="mu-base.css" rel="stylesheet" type="text/css"> -->
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="mkdown.js"></script>
-        <script type="text/javascript" src="liveview.js"></script>
-
+        <script type="text/javascript" src="css-live.js"></script>
+        <style type="text/css" id="css-pers"></style>
         <script language="">
                 $(document).ready(function() {
                         $.ajax({
-                                url: "./example.md",
+                                url: "./mu-base.css",
                                 success : function (data) {
                                         $("#text_ed").val(data);
+                                        $("#css-pers").append(data);
+                                }
+                        });
+                        $.ajax({
+                                url: "./example.md",
+                                success : function (data) {
                                         compile(data,"#text");
                                 }
                         });
@@ -25,7 +31,7 @@
 </head>
 <body>
         <header>
-        <h2>Fast markup editor</h2>
+        <h2>Fast css editor</h2>
         </header>
         <section class="editor">
                 <div class="edit-div">

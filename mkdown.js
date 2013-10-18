@@ -32,6 +32,7 @@ function compile(input,texttag){
 	};
 
 	var inTable=false;
+	// var paragraph=false;
 	var tableid=0;
 
 	for(var i = 0;i < lines.length;i++){
@@ -133,6 +134,15 @@ function compile(input,texttag){
 			text="";
 		}
 		else text+="<br>";
+		// if (text=="<br>"){
+		// 	if (paragraph){
+		// 		text="</p><p>";
+		// 	}
+		// 	else{
+		// 		text="<p>";
+		// 	}
+		// }
+
 		$(texttag).append(text);
 
 	}

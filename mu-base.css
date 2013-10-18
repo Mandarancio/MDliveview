@@ -1,0 +1,92 @@
+.viewer{
+	padding-left: 40px;
+	color: #777;
+}
+
+.viewer h1{
+	position: relative;
+	left: -30px;
+	color: #555;
+}
+
+.viewer h2{
+	position: relative;
+	left: -20px;
+	color: #555;
+}
+
+.viewer h3{
+	position: relative;
+	left: -10px;
+	color: #555;
+}
+
+.viewer figure{
+	max-width: 80%;
+	padding:10px;
+	background: #555;
+	color: #fff;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 5px 5px 5px 5px;
+        box-shadow:0 2px #bbb;
+}
+.viewer img{
+	width: 100%;
+	max-width: 100%;
+}
+.viewer table td{
+	border-style: solid;
+	border-color: #ccc;
+	border-size: 1px;
+	margin-right: 0;
+	padding: 5px;
+        border-radius:5px;
+}
+
+
+.viewer code{
+        color:#000;
+	background: #F0E19E;
+	padding: 2px;
+	border-radius: 4px 4px 4px 4px;
+        box-shadow:0 1px #bbb;
+}
+
+
+#index-list{
+	font-size: 8px;
+	background: #ccc;
+	padding:5px;
+	border-color: #bbb;
+	border-style: solid;
+	border-radius: 5px 5px 5px 5px;
+	width: 400px;
+        box-shadow:0 2px #ccc;
+}
+
+#index-list h1{
+	position: relative;
+	left: 10px;
+	color: #555;
+}
+
+#index-list h2{
+	position: relative;
+	left: 20px;
+	color: #555;
+}
+
+#index-list h3{
+	position: relative;
+	left: 30px;
+	color: #555;
+}
+#index-list hr{
+	border-style: solid;
+	line-height: 2px;
+	color: rgba(0,0,0,0.2);
+
+}
