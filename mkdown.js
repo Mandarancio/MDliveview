@@ -56,7 +56,8 @@ function compile(input,texttag){
  		}
 
  		if (text.indexOf("[{")!=-1){
- 			text=text.replace("[{","<table id=\"table-"+tableid+"\"></table>");
+ 			text=text.replace("[{","");
+ 			text="<table id=\"table-"+tableid+"\""+text+"></table>";
  			$(texttag).append(text);
  			inTable=true;
  			continue;

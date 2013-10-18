@@ -3,64 +3,40 @@
 <head>
         <title>MEditor</title>
         <link href="style.css" rel="stylesheet" type="text/css">
+        <link href="header.css" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="mkdown.js"></script>
         <script type="text/javascript" src="liveview.js"></script>
 
         <script language="">
                 $(document).ready(function() {
-                        console.log("Ready()");
+                        $.ajax({
+                                url: "./example.md",
+                                success : function (data) {
+                                        $("#text_ed").val(data);
+                                        compile(data,"#text");
+                                }
+                        });
                         connect();
-                        console.log("Ready: done...");
-                        compile($("#text_ed").val(),"#text");
-                });
+              });
 
         </script>
 </head>
 <body>
-<header>
+        <header>
+        <h2>Fast markup editor</h2>
+        </header>
+        <section class="editor">
+                <div class="edit-div">
+                        <form method="post" action="" id="form-editor">
+                                <textarea name="editor" class="text-editor" id="text_ed" rows="30">
+                                </textarea>
+                        </form>
+                </div> 
+                <div class="view-div" id="viewer">
+                        <div id="text"></div>
+                </div>
 
-</header>
-<section class="editor">
-<div class="edit-div">
-<form method="post" action="" id="form-editor">
-<textarea name="editor" class="text-editor" id="text_ed" rows="30">
-#MD Live View
-{[index]}
-##Introduction
-This project is written to semplify the pubblication of web contents. 
-##Avaiable tags
-###Text modifiers
- *Bold* text
- **Italic** text
- ***Monospace*** text
-###Lists
-Unordered:
- + Element
- + *Bold element*
- + ***Italic element***
-Ordered:
- - Element
- - *Bold element*
- - **Italic element**
-###Tables
-[{
-A row
-**A cell**|***Another cell***   
-}]
-###Images
-[[sample.png]]
-[[sample.png|**Comment** of an *image*]]
-###Links
-{{http://www.google.com}}
-{{http://www.google.com|Google}}
-</textarea>
-</form>
-</div>
-<div class="view-div" id="viewer">
-<div id="text"></div>
-</div>
-
-</section>
+        </section>
 </body>
 </html>
