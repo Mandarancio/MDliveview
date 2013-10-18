@@ -50,7 +50,7 @@ html, body {
 }
 
 .view-div figure{
-	width: 80%;
+	max-width: 80%;
 	padding:10px;
 	background: #555;
 	color: #fff;
@@ -63,6 +63,12 @@ html, body {
 .view-div img{
 	width: 100%;
 	max-width: 100%;
+}
+
+.view-div code{
+	background: #F0E19E;
+	padding: 2px;
+	border-radius: 4px 4px 4px 4px;
 }
 
 
