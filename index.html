@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>MEditor</title>
-	<link href="style.css" rel="stylesheet" type="text/css">
-	<script src="jquery.js"></script>
-	<script type="text/javascript" src="mkdown.js"></script>
-	<script type="text/javascript" src="liveview.js"></script>
+        <title>MEditor</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="mkdown.js"></script>
+        <script type="text/javascript" src="liveview.js"></script>
 
-	<script  language="">
-		$(document).ready(function() {
-			console.log("Ready()");
-			connect();
-			console.log("Ready: done...");
-			compile($("#text_ed").val(),"#text");
-		});
+        <script language="">
+                $(document).ready(function() {
+                        console.log("Ready()");
+                        connect();
+                        console.log("Ready: done...");
+                        compile($("#text_ed").val(),"#text");
+                });
 
-	</script>
+        </script>
 </head>
 <body>
 <header>
@@ -31,9 +31,10 @@
 ### Sub chapter
 ***italic***
 **bold**
-Unorded list: 
+{{http://google.com|A Link}}
+Unorded list:
  * **bold item**
- * item 
+ * item
 Orded list:
  - ***italic item***
  - item
@@ -42,13 +43,13 @@ Orded list:
 </textarea>
 </form>
 </div>
-	
+        
 <div class="view-div" id="viewer">
 <div id="title"></div>
-	<!-- 	<div id="index-list">
-			<h1>Index:</h1>
-			<hr>
-		</div> -->
+        <!--         <div id="index-list">
+                        <h1>Index:</h1>
+                        <hr>
+                </div> -->
 <div id="text"></div>
 </div>
 
